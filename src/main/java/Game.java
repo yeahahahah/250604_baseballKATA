@@ -8,8 +8,25 @@ public class Game {
         assertIllegalArgument(guessNumber);
         if(guessNumber.equals(question)){
             return new GuessResult(true,3,0);
-        }else{
-            return null;
+        }else {
+            int strikeCount=0;
+            int ballCount=0;
+            for(int i=0;i<3;i++){
+                if (guessNumber.charAt(i) == question.charAt(i)) {
+                    strikeCount++;
+                    continue;
+                }else{
+                    for(int j=0;j<3;j++){
+                        if(i==j) continue;
+                        if(guessNumber.charAt(i)==question.charAt(j)){
+                            ballCount++;
+                        }
+                    }
+                }
+            }
+
+
+            return new GuessResult(false,strikeCount,ballCount);
         }
 
 

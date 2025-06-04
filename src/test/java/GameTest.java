@@ -39,13 +39,37 @@ class GameTest {
     }
 
 
+    private void assertMachtedNumber(GuessResult result, boolean solved, int strikes, int balls) {
+        assertThat(result).isNotNull();
+        assertThat(result.isSolved()).isEqualTo(solved);
+        assertThat(result.getStrikes()).isEqualTo(strikes);
+        assertThat(result.getBalls()).isEqualTo(balls);
+    }
+
+    private void generateQuestion(String questionNumber){
+        game.question=questionNumber;
+    }
     @Test
     void returnSolvedResultIfMachedNumber() {
-        game.question="123";
-        GuessResult result=game.guess("123");
-        assertThat(result).isNotNull();
-        assertThat(result.solved).isEqualTo(true);
-        assertThat(result.strikes).isEqualTo(3);
-        assertThat(result.balls).isEqualTo(0);
+        generateQuestion("123");
+
+        assertMachtedNumber(game.guess("123"), true, 3, 0);
     }
+
+    @Test
+    void returnSolvedResultIf2Strikes0Balls() {
+        generateQuestion("123");
+
+        assertMachtedNumber(game.guess("129"), false, 2, 0);
+    }
+
+
+
+    @Test
+    void returnSolvedResultIfUnMachedNumber() {
+        generateQuestion("123");
+        assertMachtedNumber(game.guess("456"), false, 0, 0);
+
+    }
+
 }
