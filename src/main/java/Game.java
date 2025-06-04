@@ -6,15 +6,21 @@ public class Game {
 
 
         assertIllegalArgument(guessNumber);
+
         if (guessNumber.equals(question)) {
             return new GuessResult(true, 3, 0);
-        } else {
-            int strikeCount = getStrikeCount(guessNumber);
-            int ballCount = getBallCount(guessNumber);
-           return new GuessResult(false, strikeCount, ballCount);
         }
 
 
+        return guessWrongResult(guessNumber);
+
+
+    }
+
+    private GuessResult guessWrongResult(String guessNumber) {
+        int strikeCount = getStrikeCount(guessNumber);
+        int ballCount = getBallCount(guessNumber);
+        return new GuessResult(false, strikeCount, ballCount);
     }
 
     private int getBallCount(String guessNumber) {

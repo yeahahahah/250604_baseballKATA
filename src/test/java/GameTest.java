@@ -59,14 +59,12 @@ class GameTest {
     @Test
     void returnSolvedResultIf2Strikes0Balls() {
         generateQuestion("123");
-
         assertMachtedNumber(game.guess("129"), false, 2, 0);
     }
 
     @Test
     void returnSolvedResultIf1Strikes2Balls() {
         generateQuestion("123");
-
         assertMachtedNumber(game.guess("128"), false, 2, 0);
     }
 
